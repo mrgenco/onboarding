@@ -1,0 +1,26 @@
+# Ignore Node.js-related files and folders for onboarding-ui
+/onboarding-ui/node_modules
+/onboarding-ui/.next
+/onboarding-ui/out
+
+# Ignore Spring Boot-related files and folders for onboarding-api
+/onboarding-api/target
+/onboarding-api/.mvn
+/onboarding-api/.gradle
+
+# Ignore IDE files (adjust if you use a different IDE)
+/.vscode
+/.idea
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore temporary files
+*.log
+*.tmp
+
+# Ignore environment-specific files
+.env
+.env.local
+.env.*.local
