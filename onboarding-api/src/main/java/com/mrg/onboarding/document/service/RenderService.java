@@ -1,7 +1,8 @@
 package com.mrg.onboarding.document.service;
 
 import com.mrg.onboarding.document.Document;
-import com.mrg.onboarding.document.DocumentHtmlDto;
+import com.mrg.onboarding.document.dto.DocumentHtmlDto;
+import com.mrg.onboarding.document.dto.DocumentRawDto;
 import com.mrg.onboarding.utils.FileUtils;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -43,8 +44,13 @@ public class RenderService {
         return contentMap;
     }
 
-    public String renderMarkDownRaw(Document document) {
-        return FileUtils.readMarkdownFile(documentPath + document.getUuid() + ".md");
+    public DocumentRawDto renderMarkDownRaw(Document document) {
+        String rawMarkDown = FileUtils.readMarkdownFile(documentPath + document.getUuid() + ".md");
+        return DocumentRawDto.builder()
+                .content(rawMarkDown)
+                .title(document.getTitle())
+                .lastUpdatedTime(document.getLastUpdatedTime())
+                .build();
     }
 
     public DocumentHtmlDto renderMarkDownHtml(Document document)  {

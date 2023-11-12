@@ -30,7 +30,6 @@ export default function RootLayout({
       </nav>
 
       <div className="container mx-auto p-8">
-        <h1 className="text-4xl font-bold mb-8">Welcome to Your Website</h1>
         {children}
       </div>
       </body>

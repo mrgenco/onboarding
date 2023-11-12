@@ -1,6 +1,8 @@
 package com.mrg.onboarding.document;
 
 
+import com.mrg.onboarding.document.dto.DocumentHtmlDto;
+import com.mrg.onboarding.document.dto.DocumentRawDto;
 import com.mrg.onboarding.document.service.DocumentService;
 import com.mrg.onboarding.document.service.RenderService;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +38,7 @@ public class DocumentController {
     }
 
     @GetMapping(value = "/raw/{uuid}")
-    public ResponseEntity<String> getRawDocument(@PathVariable UUID uuid){
+    public ResponseEntity<DocumentRawDto> getRawDocument(@PathVariable UUID uuid){
         try{
             Optional<Document> document = documentService.getDocumentByUuid(uuid);
             if(document.isPresent()){
