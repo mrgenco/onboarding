@@ -22,13 +22,13 @@ export default async function Page({ params }: { params: { uuid: string} }) {
     return (
         <div className='text-black'>
             <h1 className="text-4xl font-bold mb-8">{document.title}</h1>
-            <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+            <div className="relative w-full px-6 py-12 bg-white shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5 md:max-w-3xl md:mx-auto lg:max-w-4xl lg:pt-16 lg:pb-28">
                 <h2 className="text-2xl font-bold mb-8">About this document</h2>
                 <h3>Last updated : {document.lastUpdatedTime} </h3>
                 <h3>Written by : </h3>
             </div>
             <br />
-            <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-center leading-normal">
+            <div className="relative w-full px-6 py-12 bg-white shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5 md:max-w-3xl md:mx-auto lg:max-w-4xl lg:pt-16 lg:pb-28">
                 <article className="prose lg:prose-xl" dangerouslySetInnerHTML={{__html:document.content}}/>
             </div>
         </div>
