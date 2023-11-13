@@ -1,7 +1,7 @@
 import ReactMarkDown from 'react-markdown'
 
 async function renderDocument(uuid : string) {
-    const res = await fetch('http://localhost:8080/document/raw/' + uuid, { cache: 'no-store' })
+    const res = await fetch('http://localhost:8080/document/html/' + uuid, { cache: 'no-store' })
     console.log(uuid);
     if (!res.ok) {
         throw new Error('Failed to fetch document information')
@@ -28,8 +28,8 @@ export default async function Page({ params }: { params: { uuid: string} }) {
                 <h3>Written by : </h3>
             </div>
             <br />
-            <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <ReactMarkDown>{document.content}</ReactMarkDown>
+            <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-center leading-normal">
+                <article className="prose lg:prose-xl" dangerouslySetInnerHTML={{__html:document.content}}/>
             </div>
         </div>
     )
