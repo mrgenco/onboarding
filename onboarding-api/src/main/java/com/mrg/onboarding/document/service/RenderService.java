@@ -45,9 +45,9 @@ public class RenderService {
     }
 
     public DocumentRawDto renderMarkDownRaw(Document document) {
-        String rawMarkDown = FileUtils.readMarkdownFile(documentPath + document.getUuid() + ".md");
+        String rawMarkDownContent = FileUtils.readMarkdownFile(documentPath + document.getUuid() + ".md");
         return DocumentRawDto.builder()
-                .content(rawMarkDown)
+                .content(rawMarkDownContent)
                 .title(document.getTitle())
                 .lastUpdatedTime(document.getLastUpdatedTime())
                 .build();
