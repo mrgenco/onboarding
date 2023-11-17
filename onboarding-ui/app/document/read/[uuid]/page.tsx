@@ -1,5 +1,3 @@
-import ReactMarkDown from 'react-markdown'
-
 async function renderDocument(uuid : string) {
     const res = await fetch('http://localhost:8080/document/html/' + uuid, { cache: 'no-store' })
     console.log(uuid);
