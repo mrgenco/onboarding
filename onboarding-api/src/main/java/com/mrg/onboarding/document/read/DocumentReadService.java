@@ -1,4 +1,4 @@
-package com.mrg.onboarding.document.service;
+package com.mrg.onboarding.document.read;
 
 
 import com.mrg.onboarding.document.Document;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class DocumentService {
+public class DocumentReadService {
 
     private final DocumentRepository documentRepository;
 

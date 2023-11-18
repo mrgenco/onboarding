@@ -1,9 +1,9 @@
-package com.mrg.onboarding.document.service;
+package com.mrg.onboarding.document.render;
 
 import com.mrg.onboarding.document.Document;
+import com.mrg.onboarding.document.FileUtils;
 import com.mrg.onboarding.document.dto.DocumentHtmlDto;
 import com.mrg.onboarding.document.dto.DocumentRawDto;
-import com.mrg.onboarding.utils.FileUtils;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
@@ -22,9 +22,13 @@ import java.util.stream.Stream;
 @Service
 public class RenderService {
 
+    // TODO : Apply Strategy Design Pattern for different rendering algorithms
+
     @Value("${document.path}")
     private String documentPath;
-    public Map<String, String> renderMarkDownBySections(Document document) throws IOException, URISyntaxException {
+
+
+    public Map<String, String> renderMarkDownSectionFormat(Document document) throws IOException, URISyntaxException {
         Path path = Paths.get(documentPath + document.getUuid() + ".md");
         Stream<String> lines = Files.lines(path);
         Map<String, String> contentMap = new LinkedHashMap<>();
@@ -44,7 +48,8 @@ public class RenderService {
         return contentMap;
     }
 
-    public DocumentRawDto renderMarkDownRaw(Document document) {
+    // Renders document in raw format, for authoring purpose
+    public DocumentRawDto renderMarkDownRawFormat(Document document) {
         String rawMarkDownContent = FileUtils.readMarkdownFile(documentPath + document.getUuid() + ".md");
         return DocumentRawDto.builder()
                 .content(rawMarkDownContent)
@@ -53,7 +58,8 @@ public class RenderService {
                 .build();
     }
 
-    public DocumentHtmlDto renderMarkDownHtml(Document document)  {
+    // Renders document in HTML format, for reading purpose
+    public DocumentHtmlDto renderMarkDownHtmlFormat(Document document)  {
         String markdownContent = FileUtils.readMarkdownFile(documentPath + document.getUuid() + ".md");
         Parser parser = Parser.builder().build();
         Node doc = parser.parse(markdownContent);

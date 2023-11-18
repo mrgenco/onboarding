@@ -1,10 +1,10 @@
-package com.mrg.onboarding.document;
+package com.mrg.onboarding.document.read;
 
 
+import com.mrg.onboarding.document.Document;
 import com.mrg.onboarding.document.dto.DocumentHtmlDto;
 import com.mrg.onboarding.document.dto.DocumentRawDto;
-import com.mrg.onboarding.document.service.DocumentService;
-import com.mrg.onboarding.document.service.RenderService;
+import com.mrg.onboarding.document.render.RenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +18,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/document")
 @RequiredArgsConstructor
-public class DocumentController {
+public class DocumentReadController {
 
-    private final DocumentService documentService;
+    private final DocumentReadService documentService;
     private final RenderService renderService;
 
     @GetMapping(value = "{uuid}")
@@ -28,7 +28,7 @@ public class DocumentController {
         try{
             Optional<Document> document = documentService.getDocumentByUuid(uuid);
             if(document.isPresent()){
-                return new ResponseEntity<>(renderService.renderMarkDownBySections(document.get()), HttpStatus.FOUND);
+                return new ResponseEntity<>(renderService.renderMarkDownSectionFormat(document.get()), HttpStatus.FOUND);
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -42,7 +42,7 @@ public class DocumentController {
         try{
             Optional<Document> document = documentService.getDocumentByUuid(uuid);
             if(document.isPresent()){
-                return new ResponseEntity<>(renderService.renderMarkDownRaw(document.get()), HttpStatus.OK);
+                return new ResponseEntity<>(renderService.renderMarkDownRawFormat(document.get()), HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -58,7 +58,7 @@ public class DocumentController {
             System.out.println("UUID : " + uuid);
             Optional<Document> document = documentService.getDocumentByUuid(uuid);
             if(document.isPresent()){
-                return new ResponseEntity<>(renderService.renderMarkDownHtml(document.get()), HttpStatus.OK);
+                return new ResponseEntity<>(renderService.renderMarkDownHtmlFormat(document.get()), HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
