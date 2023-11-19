@@ -1,4 +1,4 @@
-import DocumentCard from '../components/DocumentCard'
+import DocumentCard from './components/DocumentCard'
 
 async function getDocuments() {
     const res = await fetch('http://localhost:8080/document/list', { cache: 'no-store' })
