@@ -1,7 +1,7 @@
 -- Drop the existing table
-DROP TABLE IF EXISTS public.Document;
-DROP TABLE IF EXISTS public.User;
 DROP TABLE IF EXISTS public.Access;
+DROP TABLE IF EXISTS public.Users;
+DROP TABLE IF EXISTS public.Document;
 
 -- Create the new table
 CREATE TABLE public.Document (
