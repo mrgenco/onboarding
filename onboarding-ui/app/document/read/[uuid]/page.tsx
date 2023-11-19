@@ -1,5 +1,7 @@
+import ReactMarkdown from 'react-markdown'
+
 async function renderDocument(uuid : string) {
-    const res = await fetch('http://localhost:8080/document/html/' + uuid, { cache: 'no-store' })
+    const res = await fetch('http://localhost:8080/document/raw/' + uuid, { cache: 'no-store' })
     console.log(uuid);
     if (!res.ok) {
         throw new Error('Failed to fetch document information')
@@ -27,7 +29,11 @@ export default async function Page({ params }: { params: { uuid: string} }) {
             </div>
             <br />
             <div className="relative w-full px-6 py-12 bg-white shadow-xl shadow-slate-700/10 ring-1 ring-gray-900/5 md:max-w-3xl md:mx-auto lg:max-w-4xl lg:pt-16 lg:pb-28">
-                <article className="prose lg:prose-xl" dangerouslySetInnerHTML={{__html:document.content}}/>
+                <article className="prose lg:prose-xl">
+                    <ReactMarkdown>
+                        {document.content}
+                    </ReactMarkdown>
+                </article>
             </div>
         </div>
     )

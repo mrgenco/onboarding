@@ -26,7 +26,7 @@ export default function DocumentCard(props: DocumentCardProps){
                     <p className="text-gray-600">Aug 18</p>
                     <br />
                     <div className="flex flex-row-reverse">
-                        <Link className="px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-blue-600 hover:underline hover:text-blue-200" href={`/document/read/${encodeURIComponent(props.uuid)}`}>
+                        <Link className="px-6 py-3 text-blue-100 no-underline bg-blue-500 rounded hover:bg-gray-600 hover:text-white-500" href={`/document/read/${encodeURIComponent(props.uuid)}`}>
                             Start Reading
                         </Link>
                     </div>

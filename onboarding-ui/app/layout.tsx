@@ -21,10 +21,10 @@ export default function RootLayout({
 
       <nav className="bg-blue-500 p-4">
         <div className="container mx-auto flex items-center justify-between">
-          <a href="#" className="text-white text-lg font-semibold">Your Logo</a>
-          <div className="flex space-x-4">
-            <Link href="/document/list">Home</Link>
-            <Link href="/document/read">Profile</Link>
+          <a href="#" className="text-white text-lg font-semibold">Onboarding</a>
+          <div className="flex space-x-2">
+            <Link className='px-3 py-2 text-blue-100 no-underline bg-blue-500 rounded hover:bg-gray-600 hover:text-white-500' href="/document/list">Home</Link>
+            <Link className='px-3 py-2 text-blue-100 no-underline bg-blue-500 rounded hover:bg-gray-600 hover:text-white-500' href="/document/create">Create New Document</Link>
           </div>
         </div>
       </nav>
