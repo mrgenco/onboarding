@@ -22,7 +22,7 @@ public class DocumentWriteService {
     private final DocumentRepository documentRepository;
 
     @Transactional
-    public void saveAsDraft(DocumentRawDto documentRawDto){
+    public void saveAsDraft(DocumentWriteRequest documentWriteRequest){
 
         // DB operations
         // Check if record exist with draft status
@@ -38,7 +38,7 @@ public class DocumentWriteService {
     }
 
     @Transactional
-    public void saveAsPublished(DocumentRawDto documentRawDto){
+    public void saveAsPublished(DocumentWriteRequest documentWriteRequest){
 
 
 
