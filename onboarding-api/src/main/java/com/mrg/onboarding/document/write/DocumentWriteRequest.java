@@ -3,6 +3,7 @@ package com.mrg.onboarding.document.write;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.util.UUID;
