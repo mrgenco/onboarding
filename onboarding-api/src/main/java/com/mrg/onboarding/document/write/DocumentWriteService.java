@@ -28,9 +28,7 @@ public class DocumentWriteService {
     public void saveAsDraft(DocumentWriteRequest documentWriteRequest){
 
         // DB operations
-        // Check if record exist with draft status
-        // if record exist, update information
-        // else create new record with Draft status
+        // TODO : use model mapper for dto2model and base model for last updatedtime and other common fields
         if(documentWriteRequest.getUuid() != null){
             Optional<Document> existingDocument = documentRepository.findByUuid(documentWriteRequest.getUuid());
             Document document;
@@ -41,6 +39,7 @@ public class DocumentWriteService {
             }else{
                 document = new Document();
                 document.setTitle(documentWriteRequest.getTitle());
+                document.setStatus(DocumentStatus.DRAFT.getCode());
                 document.setSummary(documentWriteRequest.getContent().substring(0,300));
                 document.setUuid(UUID.randomUUID());
             }
