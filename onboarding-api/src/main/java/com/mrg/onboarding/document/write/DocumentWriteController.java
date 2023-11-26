@@ -22,7 +22,7 @@ public class DocumentWriteController {
     @PostMapping(value = "/draft")
     public ResponseEntity<?> saveAsDraft(@RequestBody DocumentWriteRequest documentWriteRequest){
         try{
-            documentWriteService.saveAsDraft(documentWriteRequest);
+            documentWriteService.saveDocument(documentWriteRequest);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception ex){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -32,7 +32,7 @@ public class DocumentWriteController {
     @PostMapping(value = "/publish")
     public ResponseEntity<?> saveAsPublish(@RequestBody DocumentWriteRequest documentWriteRequest){
         try{
-            documentWriteService.saveAsPublished(documentWriteRequest);
+            documentWriteService.saveDocument(documentWriteRequest);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception ex){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
