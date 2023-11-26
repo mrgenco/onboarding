@@ -29,33 +29,34 @@ public class DocumentWriteService {
     @Transactional
     public void saveDocument(DocumentWriteRequest documentWriteRequest){
 
-        // DB operations
-        // TODO : use model mapper for dto2model and base model for last updatedtime and other common fields
-        if(documentWriteRequest.getUuid() != null){
-            Optional<Document> existingDocument = documentRepository.findByUuid(documentWriteRequest.getUuid());
-            Document document;
-            if(existingDocument.isPresent()){
-                document = existingDocument.get();
-                mapper.map(documentWriteRequest, document);
-                // todo do this on pre-persist
-                document.setSummary(documentWriteRequest.getContent().substring(0,300));
-            }else{
-                document = new Document();
+        // Database operations
+        Optional<DocumentStatus> requestDocumentStatus = DocumentStatus.findByValue(documentWriteRequest.getStatus());
+        if(requestDocumentStatus.isPresent()){
+            if(documentWriteRequest.getUuid() != null){
+                // UPDATE DOCUMENT
+                Optional<Document> existingDocument = documentRepository.findByUuid(documentWriteRequest.getUuid());
+                if(existingDocument.isPresent()){
+                    Document document = existingDocument.get();
+                    document.setStatus(requestDocumentStatus.get().getCode());
+                    document.setTitle(documentWriteRequest.getTitle());
+                    document.setSummary(documentWriteRequest.getContent().substring(0,100));
+                    documentRepository.save(document);
+                }
+            } else{
+                // CREATE NEW DOCUMENT
+                Document document = new Document();
                 document.setTitle(documentWriteRequest.getTitle());
                 document.setStatus(DocumentStatus.PUBLISHED.getCode());
-                document.setSummary(documentWriteRequest.getContent().substring(0,300));
-                // todo do this on pre-persist
-                document.setUuid(UUID.randomUUID());
+                document.setSummary(documentWriteRequest.getContent().substring(0,100));
+                documentRepository.save(document);
             }
-            documentRepository.save(document);
+
         }
 
-
-
-        // File operations
-        // Check if a file with a draft status already exist
-        // if file exist, delete and create new file_draft.md
-        // else create new file.md in the file system
+        // File System operations
+        // TODO Check if a file with a draft status already exist
+        //      if file exist, delete and create new file_draft.md
+        //      else create new file.md in the file system
 
 
     }

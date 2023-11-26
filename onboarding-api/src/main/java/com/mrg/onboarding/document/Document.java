@@ -39,4 +39,20 @@ public class Document {
 
     @Column(name = "status")
     private Integer status;
+
+    @PrePersist
+    public void onPrePersist() {
+        this.setUuid(UUID.randomUUID());
+        this.setCreatedBy(1L); // TODO get from security context
+        this.setLastUpdatedBy(1L); // TODO get from security context
+        this.setCreatedTime(LocalDateTime.now());
+        this.setLastUpdatedTime(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        this.setCreatedBy(1L); // TODO get from security context
+        this.setLastUpdatedBy(1L);
+        this.setLastUpdatedTime(LocalDateTime.now());
+    }
 }

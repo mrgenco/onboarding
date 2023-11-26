@@ -1,5 +1,7 @@
 package com.mrg.onboarding.document;
 
+import java.util.Optional;
+
 public enum DocumentStatus {
 
     DRAFT(1),
@@ -13,5 +15,13 @@ public enum DocumentStatus {
 
     public int getCode(){
         return this.getCode();
+    }
+
+    public static Optional<DocumentStatus> findByValue(int code){
+        for(DocumentStatus status : DocumentStatus.values()){
+            if(status.getCode() == code)
+                return Optional.of(status);
+        }
+        return null;
     }
 }
