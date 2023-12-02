@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Link from 'next/link'
+import SideNav from '@/app/ui/sidenav';
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,19 +19,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
 
-      <nav className="bg-blue-500 p-4">
-        <div className="container mx-auto flex items-center justify-between">
-          <a href="#" className="text-white text-lg font-semibold">Onboarding</a>
-          <div className="flex space-x-2">
-            <Link className='px-3 py-2 text-blue-100 no-underline bg-blue-500 rounded hover:bg-gray-600 hover:text-white-500' href="/document/list">Home</Link>
-            <Link className='px-3 py-2 text-blue-100 no-underline bg-blue-500 rounded hover:bg-gray-600 hover:text-white-500' href="/document/create">Create New Document</Link>
-          </div>
+      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+        <div className="w-full flex-none md:w-64">
+          <SideNav />
         </div>
-      </nav>
-
-      <div className="container mx-auto p-8">
-        {children}
+        <div className="grow p-6 md:overflow-y-auto md:p-12">{children}</div>
       </div>
+
       </body>
     </html>
   )
