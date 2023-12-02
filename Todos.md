@@ -9,10 +9,14 @@ NEXT and REACT
 Create a page for new documents
  - Markdown editor
  - Publish & Save as Draft buttons
- - Read about Next Auth
+
+
 
 ### API
 - Create services for saving new document
-- Read about Spring Security dependencies and configs
 
+
+### LEARN
+Read about Next Auth
+Read about Spring Security dependencies and configs
 

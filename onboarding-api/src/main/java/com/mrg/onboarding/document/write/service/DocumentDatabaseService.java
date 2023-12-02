@@ -1,9 +1,10 @@
-package com.mrg.onboarding.document.write;
+package com.mrg.onboarding.document.write.service;
 
 
 import com.mrg.onboarding.document.Document;
 import com.mrg.onboarding.document.DocumentRepository;
 import com.mrg.onboarding.document.DocumentStatus;
+import com.mrg.onboarding.document.write.DocumentWriteRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

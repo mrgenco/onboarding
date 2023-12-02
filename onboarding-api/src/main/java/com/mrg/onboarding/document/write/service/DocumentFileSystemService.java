@@ -1,6 +1,7 @@
-package com.mrg.onboarding.document.write;
+package com.mrg.onboarding.document.write.service;
 
 
+import com.mrg.onboarding.document.write.DocumentWriteRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
