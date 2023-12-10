@@ -10,7 +10,7 @@ const links = [
   { name: 'Home', href: '/document/list',},
   {
     name: 'New Doc',
-    href: '/document/create',
+    href: '/document/edit/new',
   }
 ];
 
