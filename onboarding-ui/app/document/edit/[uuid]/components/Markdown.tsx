@@ -8,19 +8,24 @@ interface MarkdownEditorProps {
 const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ onChange }) => {
   const [markdown, setMarkdown] = useState('');
 
-  const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const newMarkdown = e.target.value;
+  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const newMarkdown = event.target.value;
     setMarkdown(newMarkdown);
     onChange(newMarkdown);
   };
 
   return (
-    <textarea
-      className="w-full h-screen p-4"
-      value={markdown}
-      onChange={handleInputChange}
-      placeholder="Enter your markdown here..."
-    />
+    <div className="w-full h-screen p-4 border-l border-gray-300">
+
+             
+        <p className='text-blue-600'>Markdown Editor</p>
+        <textarea
+        className="w-full h-screen p-4"
+        value={markdown}
+        onChange={handleInputChange}
+        placeholder="Enter your markdown here..."
+        />
+    </div>
   );
 };
 

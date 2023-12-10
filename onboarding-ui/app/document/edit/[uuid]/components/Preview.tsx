@@ -7,11 +7,14 @@ interface MarkdownPreviewProps {
 
 const Preview: React.FC<MarkdownPreviewProps> = ({ markdown }) => {
   return (
+    <>
     <div className="w-full h-screen p-4 border-l border-gray-300">
+        <p className='text-blue-600'>Preview</p>
         <article className="prose lg:prose-xl">
             <ReactMarkdown>{markdown}</ReactMarkdown>
         </article>
     </div>
+    </>
   );
 };
 
