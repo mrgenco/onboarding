@@ -17,6 +17,8 @@ public class DocumentWriteManager {
     @Transactional
     public void saveDocument(DocumentWriteRequest documentWriteRequest) {
         documentDatabaseService.saveDocument(documentWriteRequest);
+        // TODO : depending on the login method the documents will be stored on github or CDN
+
         documentFileSystemService.saveDocument(documentWriteRequest);
     }
 }

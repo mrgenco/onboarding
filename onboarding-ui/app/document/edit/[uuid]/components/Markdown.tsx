@@ -5,13 +5,13 @@ interface MarkdownEditorProps {
   onChange: (markdown: string) => void;
 }
 
-const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ onChange }) => {
+export default function MarkdownEditor(props: MarkdownEditorProps) {
   const [markdown, setMarkdown] = useState('');
 
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const newMarkdown = event.target.value;
     setMarkdown(newMarkdown);
-    onChange(newMarkdown);
+    props.onChange(newMarkdown);
   };
 
   return (
@@ -28,5 +28,3 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ onChange }) => {
     </div>
   );
 };
-
-export default MarkdownEditor;
