@@ -19,18 +19,8 @@ public class DocumentWriteController {
 
     private final DocumentWriteManager documentWriteManager;
 
-    @PostMapping(value = "/draft")
-    public ResponseEntity<?> saveAsDraft(@RequestBody DocumentWriteRequest documentWriteRequest){
-        try{
-            documentWriteManager.saveDocument(documentWriteRequest);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception ex){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PostMapping(value = "/publish")
-    public ResponseEntity<?> saveAsPublish(@RequestBody DocumentWriteRequest documentWriteRequest){
+    @PostMapping(value = "/save")
+    public ResponseEntity<?> save(@RequestBody DocumentWriteRequest documentWriteRequest){
         try{
             documentWriteManager.saveDocument(documentWriteRequest);
             return new ResponseEntity<>(HttpStatus.OK);

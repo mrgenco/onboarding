@@ -4,10 +4,15 @@ import com.mrg.onboarding.document.dto.DocumentRawDto;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.FileAttribute;
 
 public class FileUtils {
+
+    public static boolean isFileExist(String filePath) {
+        return Files.exists(Paths.get(filePath));
+    }
 
     public static String readMarkdownFile(String filePath) {
         try {
@@ -18,11 +23,12 @@ public class FileUtils {
         }
     }
 
-    public static void createMarkdownFile(String filePath, DocumentRawDto documentRawDto) {
-        try {
-            Files.createFile(Paths.get(filePath), null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void createMarkdownFile(String filePath, String content) throws IOException {
+        Files.writeString(Path.of(filePath), content);
+    }
+
+    public static void deleteIfExist(String path) throws IOException {
+        Files.deleteIfExists(Path.of(path));
+
     }
 }

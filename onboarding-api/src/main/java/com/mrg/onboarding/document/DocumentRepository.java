@@ -15,4 +15,6 @@ public interface DocumentRepository extends PagingAndSortingRepository<Document,
     @Query("select d from Document d")
     List<Document> findAll();
     Optional<Document> findByUuid(UUID uuid);
+
+    Optional<Document> findByTitle(String title);
 }

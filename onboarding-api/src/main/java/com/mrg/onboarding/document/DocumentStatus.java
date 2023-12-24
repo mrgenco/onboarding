@@ -22,6 +22,6 @@ public enum DocumentStatus {
             if(status.getCode() == code)
                 return Optional.of(status);
         }
-        return null;
+        return Optional.empty();
     }
 }

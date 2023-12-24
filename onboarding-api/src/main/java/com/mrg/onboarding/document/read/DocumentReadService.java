@@ -3,6 +3,7 @@ package com.mrg.onboarding.document.read;
 
 import com.mrg.onboarding.document.Document;
 import com.mrg.onboarding.document.DocumentRepository;
+import com.mrg.onboarding.document.DocumentStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,9 @@ public class DocumentReadService {
 
     public List<Document> getAll() {
         return documentRepository.findAll();
+    }
+
+    public Optional<Document> getDocumentByTitle(String title) {
+        return documentRepository.findByTitle(title);
     }
 }
