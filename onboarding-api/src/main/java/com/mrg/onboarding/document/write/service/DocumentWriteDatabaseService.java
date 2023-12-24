@@ -4,7 +4,7 @@ package com.mrg.onboarding.document.write.service;
 import com.mrg.onboarding.document.Document;
 import com.mrg.onboarding.document.DocumentRepository;
 import com.mrg.onboarding.document.DocumentStatus;
-import com.mrg.onboarding.document.write.DocumentWriteRequest;
+import com.mrg.onboarding.document.write.request.DocumentWriteRequest;
 import com.mrg.onboarding.document.write.exceptions.NoDocumentFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

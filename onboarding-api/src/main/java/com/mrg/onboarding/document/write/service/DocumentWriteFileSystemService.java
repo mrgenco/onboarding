@@ -1,10 +1,8 @@
 package com.mrg.onboarding.document.write.service;
 
 
-import com.mrg.onboarding.document.DocumentStatus;
 import com.mrg.onboarding.document.FileUtils;
-import com.mrg.onboarding.document.dto.DocumentRawDto;
-import com.mrg.onboarding.document.write.DocumentWriteRequest;
+import com.mrg.onboarding.document.write.request.DocumentWriteRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

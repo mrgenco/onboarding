@@ -1,4 +1,4 @@
-package com.mrg.onboarding.document.write;
+package com.mrg.onboarding.document.write.request;
 
 
 import jakarta.validation.constraints.NotBlank;
