@@ -19,6 +19,6 @@ public class DocumentWriteFileSystemService{
     public void saveDocument(DocumentWriteRequest documentWriteRequest, UUID uuid) throws IOException {
         String path = documentPath + uuid + "_" + documentWriteRequest.getStatus()+  ".md";
         FileUtils.deleteIfExist(path);
-        FileUtils.createMarkdownFile(path, documentWriteRequest.getContent());
+        FileUtils.createFile(path, documentWriteRequest.getContent());
     }
 }

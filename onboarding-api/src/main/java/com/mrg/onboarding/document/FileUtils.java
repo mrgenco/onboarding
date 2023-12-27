@@ -23,7 +23,7 @@ public class FileUtils {
         }
     }
 
-    public static void createMarkdownFile(String filePath, String content) throws IOException {
+    public static void createFile(String filePath, String content) throws IOException {
         Files.writeString(Path.of(filePath), content);
     }
 
