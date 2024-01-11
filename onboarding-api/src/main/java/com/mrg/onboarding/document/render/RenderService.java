@@ -1,6 +1,6 @@
 package com.mrg.onboarding.document.render;
 
-import com.mrg.onboarding.document.Document;
+import com.mrg.onboarding.document.model.Document;
 import com.mrg.onboarding.document.FileUtils;
 import com.mrg.onboarding.document.dto.DocumentHtmlDto;
 import com.mrg.onboarding.document.dto.DocumentRawDto;

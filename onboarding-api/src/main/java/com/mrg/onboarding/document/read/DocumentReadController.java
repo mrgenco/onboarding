@@ -1,7 +1,8 @@
 package com.mrg.onboarding.document.read;
 
 
-import com.mrg.onboarding.document.Document;
+import com.mrg.onboarding.document.dto.DocumentDto;
+import com.mrg.onboarding.document.model.Document;
 import com.mrg.onboarding.document.dto.DocumentHtmlDto;
 import com.mrg.onboarding.document.dto.DocumentRawDto;
 import com.mrg.onboarding.document.render.RenderService;
@@ -68,9 +69,9 @@ public class DocumentReadController {
     }
 
     @GetMapping(value = "/list")
-    public ResponseEntity<List<Document>> listDocuments(){
+    public ResponseEntity<List<DocumentDto>> listDocuments(){
         try{
-            List<Document> documentList = documentService.getAll();
+            List<DocumentDto> documentList = documentService.getAll();
             if(!documentList.isEmpty()){
                 return new ResponseEntity<>(documentList, HttpStatus.OK);
             }else{

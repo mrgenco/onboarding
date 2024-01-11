@@ -1,7 +1,7 @@
 package com.mrg.onboarding.document.write.service;
 
 
-import com.mrg.onboarding.document.Document;
+import com.mrg.onboarding.document.model.Document;
 import com.mrg.onboarding.document.DocumentRepository;
 import com.mrg.onboarding.document.DocumentStatus;
 import com.mrg.onboarding.document.write.request.DocumentWriteRequest;

@@ -1,4 +1,4 @@
-package com.mrg.onboarding.document;
+package com.mrg.onboarding.document.model;
 
 import jakarta.persistence.*;
 import lombok.*;
