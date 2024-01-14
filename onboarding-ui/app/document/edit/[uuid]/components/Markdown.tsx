@@ -16,14 +16,12 @@ export default function MarkdownEditor(props: MarkdownEditorProps) {
 
   return (
     <div className="w-full h-screen p-4 border-l border-gray-300">
-
-             
         <p className='text-blue-600'>Markdown Editor</p>
         <textarea
-        className="w-full h-screen p-4"
-        value={markdown}
-        onChange={handleInputChange}
-        placeholder="Enter your markdown here..."
+            className="w-full h-screen p-4"
+            value={markdown}
+            onChange={handleInputChange}
+            placeholder="Enter your markdown here..."
         />
     </div>
   );

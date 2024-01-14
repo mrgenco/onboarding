@@ -19,7 +19,7 @@ export default async function Page() {
     const documents: Document[] = await getDocuments();
 
     return (
-        <div className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-3">
             {documents.map(document =>
                 <DocumentCard uuid={document.uuid} title={document.title} summary={document.summary}/>
             )}
