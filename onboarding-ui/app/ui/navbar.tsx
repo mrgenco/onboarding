@@ -1,11 +1,11 @@
 import { useSidebarContext } from "../context/SidebarContext";
 import { isSmallScreen } from "../helpers/is-small-screen";
 import { DarkThemeToggle, Navbar } from "flowbite-react";
-import Image from "next/image";
 import type { FC } from "react";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
+import { Button } from 'flowbite-react';
 
-export const DashboardNavbar: FC<Record<string, never>> = function () {
+export const NavBar: FC<Record<string, never>> = function () {
   const { isCollapsed: isSidebarCollapsed, setCollapsed: setSidebarCollapsed } =
     useSidebarContext();
 
@@ -30,12 +30,14 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
                   <HiX className="h-6 w-6" />
                 )}
               </button>
+
               <Navbar.Brand href="/">
                 <span className="self-center whitespace-nowrap px-3 text-xl font-semibold dark:text-white">
                   Flowbite
                 </span>
               </Navbar.Brand>
             </div>
+            <Button outline gradientDuoTone="greenToBlue"> Save Document </Button>
             <DarkThemeToggle />
           </div>
         </div>

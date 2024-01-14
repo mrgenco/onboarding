@@ -8,8 +8,8 @@ import { flowbiteTheme } from "./theme";
 import { SidebarProvider } from "./context/SidebarContext";
 import { useSidebarContext } from "./context/SidebarContext";
 import type { FC, PropsWithChildren } from "react";
-import { DashboardNavbar } from "./ui/navbar";
-import { DashboardSidebar } from "./ui/sidebar";
+import { NavBar } from "./ui/navbar";
+import { SideBar } from "./ui/sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,9 +35,9 @@ const Content: FC<PropsWithChildren> = function ({ children }) {
 
   return (
     <>
-      <DashboardNavbar />
+      <NavBar />
       <div className="mt-16 flex items-start">
-        <DashboardSidebar />
+        <SideBar />
         <div
           id="main-content"
           className={twMerge(

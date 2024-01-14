@@ -13,7 +13,7 @@ import {
 } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 
-export const DashboardSidebar: FC = function () {
+export const SideBar: FC = function () {
   const { isCollapsed } = useSidebarContext();
 
   return (
@@ -33,32 +33,6 @@ export const DashboardSidebar: FC = function () {
           </Sidebar.Item>
           <Sidebar.Item href="/document/edit/new" icon={HiViewBoards}>
             Edit Document
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiInbox}>
-            Inbox
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiUser}>
-            Users
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiShoppingBag}>
-            Products
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiArrowSmRight}>
-            Sign In
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiTable}>
-            Sign Up
-          </Sidebar.Item>
-        </Sidebar.ItemGroup>
-        <Sidebar.ItemGroup>
-          <Sidebar.Item href="#" icon={HiChartPie}>
-            Upgrade to Pro
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiViewBoards}>
-            Documentation
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={BiBuoy}>
-            Help
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
