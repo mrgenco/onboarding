@@ -6,8 +6,10 @@ import { HiMenuAlt1, HiX } from "react-icons/hi";
 import { Button } from 'flowbite-react';
 
 export const NavBar: FC<Record<string, never>> = function () {
-  const { isCollapsed: isSidebarCollapsed, setCollapsed: setSidebarCollapsed } =
-    useSidebarContext();
+  const { 
+    isCollapsed: isSidebarCollapsed, 
+    setCollapsed: setSidebarCollapsed 
+  } = useSidebarContext();
 
   return (
     <header>
