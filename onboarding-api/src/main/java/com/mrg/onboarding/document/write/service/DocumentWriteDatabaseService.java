@@ -36,16 +36,17 @@ public class DocumentWriteDatabaseService{
                     documentRepository.save(document);
                     return document.getUuid();
                 }
-                throw new NoDocumentFoundException("No document found with uuid : " + documentWriteRequest.getUuid());
+                throw new NoDocumentFoundException(documentWriteRequest.getUuid());
+            }else{
+                // CREATE NEW DOCUMENT
+                Document document = new Document();
+                document.setUuid(UUID.randomUUID());
+                document.setTitle(documentWriteRequest.getTitle());
+                document.setStatus(DocumentStatus.PUBLISHED.getCode());
+                document.setSummary(documentWriteRequest.getContent().substring(0,100));
+                documentRepository.save(document);
+                return document.getUuid();
             }
-            // CREATE NEW DOCUMENT
-            Document document = new Document();
-            document.setUuid(UUID.randomUUID());
-            document.setTitle(documentWriteRequest.getTitle());
-            document.setStatus(DocumentStatus.PUBLISHED.getCode());
-            document.setSummary(documentWriteRequest.getContent().substring(0,100));
-            documentRepository.save(document);
-            return document.getUuid();
         }
         throw new IllegalArgumentException("Document can not be published without a valid DocumentStatus!");
     }
