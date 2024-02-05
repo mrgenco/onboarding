@@ -1,7 +1,6 @@
 package com.mrg.onboarding.document.write;
 
 
-import com.mrg.onboarding.document.read.DocumentReadService;
 import com.mrg.onboarding.document.write.exceptions.NoDocumentFoundException;
 import com.mrg.onboarding.document.write.request.DocumentWriteRequest;
 import com.mrg.onboarding.document.write.service.DocumentWriteDatabaseService;
@@ -23,7 +22,7 @@ public class DocumentWriteManager {
     @Transactional
     public UUID saveDocument(DocumentWriteRequest documentWriteRequest) throws NoDocumentFoundException, IOException {
         UUID uuid = documentWriteDatabaseService.saveDocument(documentWriteRequest);
-        //TODO : depending on the login method save to file or github account
+        //TODO : depending on the preference, save file, githyb or aws s3 bucket
         documentWriteFileSystemService.saveDocument(documentWriteRequest, uuid);
         return uuid;
     }
