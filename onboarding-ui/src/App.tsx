@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, ThemeProvider } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -16,7 +16,14 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems, secondListItems} from './listItems';
+import { Routes, Route } from "react-router-dom";
+import Settings from './pages/settings/Settings';
+import Dashboard from './pages/dashboard/Dashboard';
+import MyDocuments from './pages/mydocuments/MyDocuments';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import WriteDocument from './pages/writedocument/WriteDocument';
 
 function Copyright(props: any) {
   return (
@@ -82,7 +89,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 
-export default function Dashboard() {
+export default function Layout() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -116,7 +123,7 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Onboarding App
+              Onboarding
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -142,7 +149,7 @@ export default function Dashboard() {
           <List component="nav">
             {mainListItems}
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {secondListItems}
           </List>
         </Drawer>
         <Box
@@ -159,8 +166,19 @@ export default function Dashboard() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            
             <Grid container spacing={3}>
-              
+            <Routes>
+              <Route index element={<Dashboard />} />
+              <Route path="mydocuments" element={<MyDocuments />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="writedocument" element={<WriteDocument />} />
+
+              {/* Using path="*"" means "match anything", so this route
+                    acts like a catch-all for URLs that we don't have explicit
+                    routes for. */}
+            </Routes>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
