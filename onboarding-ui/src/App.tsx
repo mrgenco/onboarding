@@ -21,8 +21,6 @@ import { Routes, Route } from "react-router-dom";
 import Settings from './pages/settings/Settings';
 import Dashboard from './pages/dashboard/Dashboard';
 import MyDocuments from './pages/mydocuments/MyDocuments';
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import WriteDocument from './pages/writedocument/WriteDocument';
 
 function Copyright(props: any) {
@@ -98,7 +96,7 @@ export default function Layout() {
   return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="fixed" open={open}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -161,13 +159,10 @@ export default function Layout() {
                 : theme.palette.grey[900],
             flexGrow: 1,
             height: '100vh',
-            overflow: 'auto',
           }}
         >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            
-            <Grid container spacing={3}>
+          <Container maxWidth="lg" sx={{ mt: 12, mb: 4 }}>
+            <main>
             <Routes>
               <Route index element={<Dashboard />} />
               <Route path="mydocuments" element={<MyDocuments />} />
@@ -179,7 +174,7 @@ export default function Layout() {
                     acts like a catch-all for URLs that we don't have explicit
                     routes for. */}
             </Routes>
-            </Grid>
+            </main>
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

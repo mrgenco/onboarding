@@ -1,25 +1,38 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
+
 
 export default function WriteDocument() {
     return (
-        <div>
-            <Grid item xs={6}>
-                <Item>test</Item>
+        <Grid container spacing={2}>
+            <Grid item xs={12} md={6} lg={6}>
+                <Paper
+                    sx={{
+                    p: 6,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                    }}
+                >
+                </Paper>
             </Grid>
-            <Grid item xs={6}>
-                <Item>test2</Item>
+            <Grid item xs={12} md={6} lg={6}>
+                <Paper
+                    sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                    }}
+                >
+                </Paper>
             </Grid>
-        </div>
+            <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                </Paper>
+            </Grid>
+      </Grid>
     );
 }
