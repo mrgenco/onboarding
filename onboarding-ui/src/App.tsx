@@ -94,7 +94,8 @@ export default function Layout() {
   };
 
   return (
-      <Box sx={{ display: 'flex' }}>
+    <div style={{ width: '100%' }}>
+      <Box sx={{ display: 'flex'}}>
         <CssBaseline />
         <AppBar position="fixed" open={open}>
           <Toolbar
@@ -159,25 +160,21 @@ export default function Layout() {
                 : theme.palette.grey[900],
             flexGrow: 1,
             height: '100vh',
+            
           }}
         >
-          <Container maxWidth="lg" sx={{ mt: 12, mb: 4 }}>
-            <main>
-            <Routes>
-              <Route index element={<Dashboard />} />
-              <Route path="mydocuments" element={<MyDocuments />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="writedocument" element={<WriteDocument />} />
-
-              {/* Using path="*"" means "match anything", so this route
-                    acts like a catch-all for URLs that we don't have explicit
-                    routes for. */}
-            </Routes>
-            </main>
+          <Container maxWidth={ false } sx={{ mt: 12, mb: 4}}>
+              <Routes>
+                <Route index element={<Dashboard />} />
+                <Route path="mydocuments" element={<MyDocuments />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="writedocument" element={<WriteDocument />} />
+              </Routes>
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>
+      </div>
   );
 }

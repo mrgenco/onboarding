@@ -10,7 +10,6 @@ export default function WriteDocument() {
             <Grid item xs={12} md={6} lg={6}>
                 <Paper
                     sx={{
-                    p: 6,
                     display: 'flex',
                     flexDirection: 'column',
                     height: 240,
@@ -21,7 +20,6 @@ export default function WriteDocument() {
             <Grid item xs={12} md={6} lg={6}>
                 <Paper
                     sx={{
-                    p: 2,
                     display: 'flex',
                     flexDirection: 'column',
                     height: 240,
