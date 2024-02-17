@@ -10,7 +10,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { DialogActions } from '@mui/material';
 
-export default function FormDialog() {
+export default function SaveDocumentDialog() {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -32,7 +32,7 @@ export default function FormDialog() {
     return (
         <React.Fragment>
             <Button variant="outlined" color='success' onClick={handleClickOpen}>
-                Open form dialog
+                Save Changes
             </Button>
             <Dialog
                 open={open}

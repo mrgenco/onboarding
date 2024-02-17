@@ -1,4 +1,3 @@
-import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import React, { useState, ChangeEvent } from 'react';
 
@@ -7,6 +6,7 @@ interface MarkdownEditorProps {
 }
 
 export default function MarkdownEditor(props: MarkdownEditorProps) {
+    
     const [markdown, setMarkdown] = useState('');
 
     const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -16,18 +16,15 @@ export default function MarkdownEditor(props: MarkdownEditorProps) {
     };
 
     return (
-        <Paper> 
-
-            <TextField
-                id="filled-multiline-static"
-                label="Write Your Document Here"
-                multiline
-                value={markdown}
-                onChange={handleInputChange}
-                fullWidth
-                defaultValue="test"
-            />
-
-        </Paper>
+        <TextField
+            id="filled-multiline-static"
+            label="Write Your Document Here"
+            multiline
+            value={markdown}
+            variant="filled"
+            onChange={handleInputChange}
+            fullWidth
+            defaultValue="test"
+        />
     );
 };

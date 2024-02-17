@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import SaveDocumentDialog from './components/SaveDocumentDialog'
-import TextField from '@mui/material/TextField';
 import Markdown from './components/Markdown';
 import Preview from './components/Preview';
 
