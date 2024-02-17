@@ -70,6 +70,8 @@ export default function FormDialog() {
                                 <TextField
                                     required
                                     fullWidth
+                                    multiline
+                                    rows={4}
                                     id="summary"
                                     label="Summary"
                                     name="summary"

@@ -1,35 +1,23 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import SaveDocumentDialog from './components/SaveDocumentDialog'
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import Markdown from './components/Markdown';
+import Preview from './components/Preview';
 
 export default function WriteDocument() {
+
+    const [markdown, setMarkdown] = useState('');
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <SaveDocumentDialog />
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
-                <TextField
-                    id="filled-multiline-static"
-                    label="Write Your Document Here"
-                    multiline
-                    fullWidth
-                    defaultValue="test"
-                />
+                <Markdown onChange={setMarkdown} />
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
-                <TextField
-                    fullWidth
-                    id="filled-multiline-static"
-                    label="Preview"
-                    multiline
-                    defaultValue=""
-                />
-            </Grid>
-            <Grid item xs={12} md={6} lg={6}>
-
+                <Preview markdown={markdown} />
             </Grid>
         </Grid>
     );
