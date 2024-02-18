@@ -38,25 +38,23 @@ export default function SaveDocumentDialog() {
                 open={open}
                 onClose={handleClose}
                 PaperProps={{
-                    component: 'form',
+                    component: "form",
                     onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
                         event.preventDefault();
                         const formData = new FormData(event.currentTarget);
                         const formJson = Object.fromEntries((formData as any).entries());
-                        const email = formJson.email;
-                        console.log(email);
+                        console.log("formJson : ", formJson);
                         handleClose();
                     },
                 }}
             >
                 <DialogTitle>Save Document</DialogTitle>
                 <DialogContent>
-                    <Box component="form" noValidate onSubmit={handleSave} sx={{ mt: 3 }}>
+                    <Box sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
 
                             <Grid item xs={12}>
                                 <TextField
-                                    autoComplete="given-name"
                                     name="title"
                                     required
                                     fullWidth
@@ -95,7 +93,7 @@ export default function SaveDocumentDialog() {
                                     fullWidth
                                     id="category"
                                     label="Categories"
-                                    helperText="Enter categories as comma seperated words. (Ex : Cloud, Programming, Math)"
+                                    helperText="Enter categories as comma seperated words. (Ex : Cloud,Programming,Math)"
                                     name="category"
                                 />
                             </Grid>
