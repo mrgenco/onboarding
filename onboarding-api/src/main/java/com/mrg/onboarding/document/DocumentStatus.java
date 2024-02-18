@@ -8,13 +8,13 @@ public enum DocumentStatus {
     PUBLISHED(2),
     DELETED(3);
 
-    private int code;
+    private final int code;
     DocumentStatus(int code) {
         this.code=code;
     }
 
     public int getCode(){
-        return this.getCode();
+        return this.code;
     }
 
     public static Optional<DocumentStatus> findByValue(int code){

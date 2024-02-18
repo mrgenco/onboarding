@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import SaveDocumentDialog from './components/SaveDocumentDialog'
-import Markdown from './components/Markdown';
-import Preview from './components/Preview';
+import Markdown from './components/DocumentEditor';
+import Preview from './components/DocumentPreview';
 
 export default function WriteDocument() {
 

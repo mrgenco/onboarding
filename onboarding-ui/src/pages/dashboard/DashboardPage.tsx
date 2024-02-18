@@ -13,7 +13,7 @@ interface ListItem {
   status: number;
 }
 
-const ListComponent: React.FC = () => {
+export default function DashboardPage() {
   const [listData, setListData] = useState<ListItem[]>([]);
 
   useEffect(() => {
@@ -72,5 +72,3 @@ const ListComponent: React.FC = () => {
     </Grid>
   );
 };
-
-export default ListComponent;

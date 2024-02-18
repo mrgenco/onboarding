@@ -11,17 +11,16 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondListItems} from './listItems';
+import { mainListItems, secondListItems} from './common/listItems';
 import { Routes, Route } from "react-router-dom";
 import Settings from './pages/settings/Settings';
-import Dashboard from './pages/dashboard/Dashboard';
-import MyDocuments from './pages/mydocuments/MyDocuments';
-import WriteDocument from './pages/writedocument/WriteDocument';
+import DashboardPage from './pages/dashboard/DashboardPage';
+import MyDocuments from './pages/mydocuments/MyDocumentsPage';
+import WriteDocument from './pages/writedocument/WriteDocumentPage';
 
 function Copyright(props: any) {
   return (
@@ -165,10 +164,10 @@ export default function Layout() {
         >
           <Container maxWidth={ false } sx={{ mt: 12, mb: 4}}>
               <Routes>
-                <Route index element={<Dashboard />} />
+                <Route index element={<DashboardPage />} />
                 <Route path="mydocuments" element={<MyDocuments />} />
                 <Route path="settings" element={<Settings />} />
-                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="dashboard" element={<DashboardPage />} />
                 <Route path="writedocument" element={<WriteDocument />} />
               </Routes>
             <Copyright sx={{ pt: 4 }} />
