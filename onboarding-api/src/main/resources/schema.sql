@@ -1,10 +1,10 @@
 -- Drop the existing table
-DROP TABLE IF EXISTS public.Access;
-DROP TABLE IF EXISTS public.Users;
-DROP TABLE IF EXISTS public.Document;
+DROP TABLE IF EXISTS public.document_access_level;
+DROP TABLE IF EXISTS public.app_user;
+DROP TABLE IF EXISTS public.document;
 
 -- Create the new table
-CREATE TABLE public.Document (
+CREATE TABLE public.document (
      id serial primary key,
      uuid uuid,
      status integer,
@@ -16,18 +16,19 @@ CREATE TABLE public.Document (
      last_updated_time timestamp(6)
 );
 
-CREATE TABLE public.Users (
+CREATE TABLE public.app_user (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
+    user_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    roles VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE public.Access (
+CREATE TABLE public.document_access_level (
     id SERIAL PRIMARY KEY,
-    document_id INT REFERENCES Document(id),
-    user_id INT REFERENCES Users(id),
-    permission_level VARCHAR(50) NOT NULL
+    document_id INT REFERENCES document(id),
+    user_id INT REFERENCES app_user(id),
+    access_level VARCHAR(50) NOT NULL
 );
 
 

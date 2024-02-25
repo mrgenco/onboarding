@@ -9,6 +9,8 @@ import com.mrg.onboarding.document.render.RenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,11 +44,8 @@ public class DocumentReadController {
     public ResponseEntity<DocumentRawDto> getRawDocument(@PathVariable UUID uuid){
         try{
             Optional<Document> document = documentService.getDocumentByUuid(uuid);
-            if(document.isPresent()){
-                return new ResponseEntity<>(renderService.renderMarkDownRawFormat(document.get()), HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+            return document.map(value -> new ResponseEntity<>(renderService.renderMarkDownRawFormat(value), HttpStatus.OK))
+                           .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }catch (Exception ex){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -58,19 +57,18 @@ public class DocumentReadController {
         try{
             System.out.println("UUID : " + uuid);
             Optional<Document> document = documentService.getDocumentByUuid(uuid);
-            if(document.isPresent()){
-                return new ResponseEntity<>(renderService.renderMarkDownHtmlFormat(document.get()), HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+            return document.map(value -> new ResponseEntity<>(renderService.renderMarkDownHtmlFormat(value), HttpStatus.OK))
+                           .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }catch (Exception ex){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping(value = "/list")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     public ResponseEntity<List<DocumentDto>> listDocuments(){
         try{
+            System.out.println("username : "+ SecurityContextHolder.getContext().getAuthentication().getName());
             List<DocumentDto> documentList = documentService.getAll();
             if(!documentList.isEmpty()){
                 return new ResponseEntity<>(documentList, HttpStatus.OK);

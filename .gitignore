@@ -24,3 +24,9 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+
+# Ignore security keys
+*.pem
+
+# Ignore IntelliJ settings
+*.idea
