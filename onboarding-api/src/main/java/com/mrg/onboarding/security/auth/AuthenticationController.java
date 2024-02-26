@@ -2,6 +2,8 @@ package com.mrg.onboarding.security.auth;
 
 import com.mrg.onboarding.security.TokenService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,16 +22,14 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
 
 
-    // TODO return custom AuthenticationResponse with refreshToken and expireTime
     @PostMapping("/login")
-    public String token(@RequestBody AuthenticationRequest authenticationRequest) throws AuthenticationException {
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authenticationRequest) throws AuthenticationException {
 
-        if(AuthenticationMethod.DB.equals(authenticationRequest.authenticationMethod())){
+        if(AuthenticationMethod.DB.getCode().equals(authenticationRequest.authenticationMethod())){
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.username(), authenticationRequest.password()));
-            return tokenService.generateToken(authentication);
+            return new ResponseEntity<>(tokenService.generateToken(authentication), HttpStatus.OK);
         }
-
-        // TODO return custom AuthenticationException
-        return null;
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
 }

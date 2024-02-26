@@ -1,4 +1,5 @@
 package com.mrg.onboarding.security;
+import com.mrg.onboarding.security.auth.AuthenticationResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -19,19 +20,41 @@ public class TokenService {
         this.encoder = encoder;
     }
 
-    public String generateToken(Authentication authentication) {
+    public AuthenticationResponse generateToken(Authentication authentication) {
+
         Instant now = Instant.now();
         String scope = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
-        JwtClaimsSet claims = JwtClaimsSet.builder()
+
+        Instant accessTokenExpireTime = now.plus(1, ChronoUnit.HOURS);
+        JwtClaimsSet accessTokenClaims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
-                .expiresAt(now.plus(1, ChronoUnit.HOURS))
+                .expiresAt(accessTokenExpireTime)
                 .subject(authentication.getName())
                 .claim("scope", scope)
                 .build();
-        return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+
+        Instant refreshTokenExpireTime = now.plus(2, ChronoUnit.HOURS);
+        JwtClaimsSet refreshTokenClaims = JwtClaimsSet.builder()
+                .issuer("self")
+                .issuedAt(now)
+                .expiresAt(refreshTokenExpireTime)
+                .subject(authentication.getName())
+                .claim("scope", scope)
+                .build();
+
+        String accessToken = this.encoder.encode(JwtEncoderParameters.from(accessTokenClaims)).getTokenValue();
+        String refreshToken = this.encoder.encode(JwtEncoderParameters.from(refreshTokenClaims)).getTokenValue();
+
+        return AuthenticationResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .expireTime(accessTokenExpireTime)
+                .build();
     }
+
+
 
 }
