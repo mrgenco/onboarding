@@ -23,6 +23,8 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
+import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -57,15 +59,17 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("api/v1/auth/login").permitAll()
+                        .requestMatchers("api/v1/auth/login", "api/v1/auth/refresh").permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(authenticationUserDetailsService)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults()))
+                .exceptionHandling(
+                        (ex) -> ex.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
+                                .accessDeniedHandler(new BearerTokenAccessDeniedHandler()))
                 .build();
     }
-
 
     @Bean
     JwtDecoder jwtDecoder() {
@@ -75,8 +79,8 @@ public class SecurityConfig {
     @Bean
     JwtEncoder jwtEncoder() {
         JWK jwk = new RSAKey.Builder(jwtConfigProperties.publicKey()).privateKey(jwtConfigProperties.privateKey()).build();
-        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-        return new NimbusJwtEncoder(jwks);
+        JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(new JWKSet(jwk));
+        return new NimbusJwtEncoder(jwkSource);
     }
 
 }
