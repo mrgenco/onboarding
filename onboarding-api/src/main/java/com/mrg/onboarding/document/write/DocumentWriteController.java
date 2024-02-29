@@ -1,7 +1,6 @@
 package com.mrg.onboarding.document.write;
 
 
-import com.mrg.onboarding.document.write.request.DocumentWriteRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/document")
 @RequiredArgsConstructor
-public class DocumentWriteController {
+class DocumentWriteController {
 
     private final DocumentWriteManager documentWriteManager;
 

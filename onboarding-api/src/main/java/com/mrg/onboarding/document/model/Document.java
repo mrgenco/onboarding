@@ -2,6 +2,7 @@ package com.mrg.onboarding.document.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

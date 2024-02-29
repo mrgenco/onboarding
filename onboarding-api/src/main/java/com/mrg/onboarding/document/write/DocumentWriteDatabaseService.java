@@ -1,11 +1,11 @@
-package com.mrg.onboarding.document.write.service;
+package com.mrg.onboarding.document.write;
 
 
 import com.mrg.onboarding.document.model.Document;
 import com.mrg.onboarding.document.DocumentRepository;
 import com.mrg.onboarding.document.DocumentStatus;
-import com.mrg.onboarding.document.write.request.DocumentWriteRequest;
-import com.mrg.onboarding.document.write.exceptions.NoDocumentFoundException;
+import com.mrg.onboarding.document.write.DocumentWriteRequest;
+import com.mrg.onboarding.document.write.NoDocumentFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class DocumentWriteDatabaseService{
+class DocumentWriteDatabaseService{
 
     private final DocumentRepository documentRepository;
 

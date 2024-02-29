@@ -48,7 +48,6 @@ public class RenderService {
         }
     }
 
-    // Renders document in raw format, for authoring purpose
     public DocumentRawDto renderMarkDownRawFormat(Document document) {
         String rawMarkDownContent = FileUtils.readMarkdownFile(documentPath + document.getUuid() + ".md");
         return DocumentRawDto.builder()
@@ -58,7 +57,6 @@ public class RenderService {
                 .build();
     }
 
-    // Renders document in HTML format, for reading purpose
     public DocumentHtmlDto renderMarkDownHtmlFormat(Document document)  {
         String markdownContent = FileUtils.readMarkdownFile(documentPath + document.getUuid() + ".md");
         Parser parser = Parser.builder().build();

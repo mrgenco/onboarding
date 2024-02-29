@@ -1,8 +1,8 @@
-package com.mrg.onboarding.document.write.service;
+package com.mrg.onboarding.document.write;
 
 
 import com.mrg.onboarding.document.FileUtils;
-import com.mrg.onboarding.document.write.request.DocumentWriteRequest;
+import com.mrg.onboarding.document.write.DocumentWriteRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class DocumentWriteFileSystemService{
+class DocumentWriteFileSystemService{
 
     @Value("${document.path}")
     private String documentPath;
