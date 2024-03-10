@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 const API_URL = "http://localhost:8080/api/v1/auth/";
 
 export const register = (username: string, email: string, password: string) => {
@@ -11,6 +11,7 @@ export const register = (username: string, email: string, password: string) => {
 };
 
 export const login = async (username: string, password: string, authmethod: string) => {
+    const navigate = useNavigate();
     const response = await axios.post(API_URL + "login", {username,password,authmethod});
     if (response.data.accessToken) {
         const user = {
@@ -18,6 +19,7 @@ export const login = async (username: string, password: string, authmethod: stri
             ...response.data
         }
         localStorage.setItem("user", JSON.stringify(user));
+        navigate("/dashboard");
     }
     return response.data;
 };

@@ -10,43 +10,39 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useState } from 'react';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { login } from "../../services/auth-service";
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../AuthProvider';
 
 
-export default function SignIn() {
-    const [loading, setLoading] = useState<boolean>(false);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        
-        const data = new FormData(event.currentTarget);
-        let navigate: NavigateFunction = useNavigate();
-    
-        setLoading(true);
-        const formData = {
-            username: data.get('username')?.toString() ?? '',
-            password: data.get('password')?.toString() ?? '',
-        };
-        console.log(formData);
+export default function LoginPage() {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let auth = useAuth();
 
-        login(formData.username, formData.password, 'DB').then(
-          () => {
-            navigate("/dashboard");
-            window.location.reload();
-          },
-          (error) => {
-            const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
-    
-            setLoading(false);
-          }
-        );
-      };
+  let from = location.state?.from?.pathname || "/";
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    console.log("signin success");
+
+    let formData = new FormData(event.currentTarget);
+    let username = formData.get("username") as string;
+
+
+    auth.signin(username, () => {
+
+      console.log("signin success");
+      // Send them back to the page they tried to visit when they were
+      // redirected to the login page. Use { replace: true } so we don't create
+      // another entry in the history stack for the login page.  This means that
+      // when they get to the protected page and click the back button, they
+      // won't end up back on the login page, which is also really nice for the
+      // user experience.
+      navigate(from, { replace: true });
+    });
+  }
 
 
   return (
@@ -92,6 +88,7 @@ export default function SignIn() {
             />
             <Button
               fullWidth
+              type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >

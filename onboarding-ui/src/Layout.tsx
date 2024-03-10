@@ -17,6 +17,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondListItems} from './common/listItems';
 import { Outlet } from "react-router-dom";
+import { AuthStatus } from './AuthProvider';
 
 function Copyright(props: any) {
   return (
@@ -90,6 +91,7 @@ export default function Layout() {
 
   return (
     <div style={{ width: '100%' }}>
+      <AuthStatus />
       <Box sx={{ display: 'flex'}}>
         <CssBaseline />
         <AppBar position="fixed" open={open}>
