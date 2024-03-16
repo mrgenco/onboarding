@@ -8,13 +8,10 @@ export const getDocumentList = () => {
 
 
 function authHeader() {
-    const userStr = localStorage.getItem("user");
-    let user = null;
-    if (userStr) 
-        user = JSON.parse(userStr);
-    
-    if (user && user.accessToken) {
-      return { Authorization: 'Bearer ' + user.accessToken };
+    const accessToken = localStorage.getItem("access_token");
+    if (accessToken) {
+      console.log("Access Token : ", accessToken);
+      return { Authorization: 'Bearer ' + accessToken };
     } 
     return { Authorization: '' }; 
   }

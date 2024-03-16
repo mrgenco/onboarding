@@ -18,7 +18,7 @@ export const authService = {
     
     try {
     
-      const response = await axios.post<AuthResponse>('http://localhost:8080/v1/auth/login', {
+      const response = await axios.post<AuthResponse>('http://localhost:8080/api/v1/auth/login', {
         username: authRequest.username,
         password: authRequest.password,
         authenticationMethod: authRequest.authenticationMethod
