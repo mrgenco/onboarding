@@ -1,15 +1,15 @@
-import { fakeAuthProvider } from "./auth";
 import React from "react";
 import {
     useLocation,
     useNavigate,
     Navigate,
   } from "react-router-dom";
+import { authService, AuthRequest } from "./services/auth-service"
 
 interface AuthContextType {
     user: any;
-    signin: (user: string, callback: VoidFunction) => void;
-    signout: (callback: VoidFunction) => void;
+    signin: (credentials: AuthRequest) => Promise<void>;
+    signout: () => Promise<void>;
 }
 
 let AuthContext = React.createContext<AuthContextType>(null!);
@@ -17,18 +17,14 @@ let AuthContext = React.createContext<AuthContextType>(null!);
 export const  AuthProvider = ({ children }: { children: React.ReactNode }) => {
     let [user, setUser] = React.useState<any>(null);
 
-    let signin = (newUser: string, callback: VoidFunction) => {
-        return fakeAuthProvider.signin(() => {
-            setUser(newUser);
-            callback();
-        });
+    let signin = async (credentials: AuthRequest) => {
+        await authService.signin(credentials);
+        setUser(credentials.username);
     };
 
-    let signout = (callback: VoidFunction) => {
-        return fakeAuthProvider.signout(() => {
-            setUser(null);
-            callback();
-        });
+    let signout = async () => {
+        await authService.signout();
+        setUser(null);
     };
 
     let value = { user, signin, signout };
@@ -68,11 +64,11 @@ export const AuthStatus = () => {
         Welcome {auth.user}!{" "}
         <button
           onClick={() => {
-            auth.signout(() => navigate("/"));
+            auth.signout().then(() => navigate("/"));
           }}
         >
           Sign out
         </button>
       </p>
     );
-  }
+}

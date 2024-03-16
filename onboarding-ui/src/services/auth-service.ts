@@ -1,36 +1,50 @@
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-const API_URL = "http://localhost:8080/api/v1/auth/";
+import axios from 'axios';
 
-export const register = (username: string, email: string, password: string) => {
-    return axios.post(API_URL + "register", {
-        username,
-        email,
-        password,
-    });
-};
+interface AuthResponse {
+  access_token: string;
+  refresh_token: string;
+  expire_time: string;
+}
 
-export const login = async (username: string, password: string, authmethod: string) => {
-    const navigate = useNavigate();
-    const response = await axios.post(API_URL + "login", {username,password,authmethod});
-    if (response.data.accessToken) {
-        const user = {
-            username,
-            ...response.data
-        }
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/dashboard");
+export interface AuthRequest {
+  username: string;
+  password: string;
+  authenticationMethod: string; 
+}
+
+export const authService = {
+  isAuthenticated: false,
+  async signin(authRequest : AuthRequest) {
+    
+    try {
+    
+      const response = await axios.post<AuthResponse>('http://localhost:8080/v1/auth/login', {
+        username: authRequest.username,
+        password: authRequest.password,
+        authenticationMethod: authRequest.authenticationMethod
+      });
+      
+      const { access_token, refresh_token, expire_time } = response.data;
+      
+      localStorage.setItem('access_token', access_token);
+      localStorage.setItem('refresh_token', refresh_token);
+      localStorage.setItem('expire_time', expire_time);
+      
+      authService.isAuthenticated = true;
+      return { access_token, refresh_token, expire_time };
+    
+    } catch (error) {
+      console.error('Error occurred during signin:', error);
+      throw error;
     }
-    return response.data;
+  },
+  async signout() {
+    // Clear tokens from local storage
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('expire_time');
+    // Update isAuthenticated to false
+    authService.isAuthenticated = false;
+  },
 };
 
-export const logout = () => {
-    localStorage.removeItem("user");
-};
-
-export const getCurrentUser = () => {
-    const userStr = localStorage.getItem("user");
-    if (userStr) 
-        return JSON.parse(userStr);
-    return null;
-};
