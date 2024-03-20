@@ -88,6 +88,7 @@ export default function Layout() {
 
   let auth = useAuth();
   
+  console.log("Layout isAuthenticated : ", auth.isAuthenticated);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -99,7 +100,7 @@ export default function Layout() {
       <Box sx={{ display: 'flex'}}>
         <CssBaseline />
         
-        {auth.user && 
+        {auth.isAuthenticated===true && 
         <React.Fragment>
           <AppBar position="fixed" open={open}>
             <Toolbar

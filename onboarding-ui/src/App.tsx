@@ -16,20 +16,13 @@ export default function App() {
     <AuthProvider>
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<DashboardPage />} />
-          <Route path="mydocuments" element={<MyDocuments />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="dashboard" element={<DashboardPage />} />
           <Route path="login" element={<LoginPage />} />
-          <Route
-            path="writedocument"
-            element={
-              <RequireAuth>
-                <WriteDocument />
-              </RequireAuth>
-            }
-          />
-
+          <Route index path="dashboard" element={<RequireAuth><DashboardPage /></RequireAuth>} />
+          <Route index element={<RequireAuth><DashboardPage /></RequireAuth>} />
+          <Route path="mydocuments" element={<RequireAuth><MyDocuments /></RequireAuth>} />
+          <Route path="settings" element={<RequireAuth><Settings /></RequireAuth>} />
+          <Route path="writedocument" element={<RequireAuth><WriteDocument /></RequireAuth>}
+        />
         </Route>
       </Routes>
     </AuthProvider>

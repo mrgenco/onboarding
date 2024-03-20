@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Grid, Card, CardContent, Typography, CardActionArea, Button } from '@mui/material';
-
+import { getDocumentList } from './services/GetDocumentListService';
 interface ListItem {
   uuid: string;
   title: string;
@@ -14,12 +13,12 @@ interface ListItem {
 }
 
 export default function DashboardPage() {
-  const [listData, setListData] = useState<ListItem[]>([]);
+  const [listData, setListData] = React.useState<ListItem[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<ListItem[]>('http://localhost:8080/document/list');
+        const response = await getDocumentList();
         setListData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
