@@ -11,7 +11,11 @@ import Box from '@mui/material/Box';
 import { DialogActions } from '@mui/material';
 import { saveDocument } from '../service/SaveDocumentService';
 
-export default function SaveDocumentDialog() {
+interface MarkdownPreviewProps {
+    markdown: string;
+}
+
+export default function SaveDocumentDialog(props: MarkdownPreviewProps) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -45,6 +49,8 @@ export default function SaveDocumentDialog() {
                         const formData = new FormData(event.currentTarget);
                         const formJson = Object.fromEntries((formData as any).entries());
                         formJson.status = status;
+                        formJson.markdown = props.markdown;
+                        console.log(formJson);
                         handleSave(formJson);
                         handleClose();
                     },

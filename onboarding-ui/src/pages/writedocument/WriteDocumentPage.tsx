@@ -10,7 +10,7 @@ export default function WriteDocument() {
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <SaveDocumentDialog />
+                <SaveDocumentDialog markdown={markdown}/>
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
                 <Markdown onChange={setMarkdown} />
