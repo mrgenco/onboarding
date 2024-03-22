@@ -1,6 +1,7 @@
 package com.mrg.onboarding.document;
 
 import com.mrg.onboarding.document.model.Document;
+import io.micrometer.common.KeyValues;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -18,4 +19,6 @@ public interface DocumentRepository extends PagingAndSortingRepository<Document,
     Optional<Document> findByUuid(UUID uuid);
 
     Optional<Document> findByTitle(String title);
+
+    List<Document> findByCreatedBy(Long id);
 }

@@ -41,14 +41,6 @@ public class AuthenticationController {
         }
     }
 
-//    @PostMapping("/register")
-//    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterationRequest authenticationRequest) throws AuthenticationException {
-//        try{
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }catch(Exception ex){
-//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//        }
-//    }
 
     @PostMapping("/refresh")
     public ResponseEntity<AuthenticationResponse> refresh(@RequestBody RefreshTokenRequest refreshTokenRequest) {

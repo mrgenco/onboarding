@@ -1,6 +1,6 @@
 package com.mrg.onboarding.security;
 
-import com.mrg.onboarding.security.auth.AppUser;
+import com.mrg.onboarding.user.AppUser;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -18,7 +18,6 @@ class DocumentWriteManager {
     @Transactional
     UUID saveDocument(DocumentWriteRequest documentWriteRequest) throws NoDocumentFoundException, IOException {
         UUID uuid = documentWriteDatabaseService.saveDocument(documentWriteRequest);
-        //TODO : depending on the preference, save file, github or aws s3 bucket
         documentWriteFileSystemService.saveDocument(documentWriteRequest, uuid);
         return uuid;
     }

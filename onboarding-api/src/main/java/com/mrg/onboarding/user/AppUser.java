@@ -1,4 +1,4 @@
-package com.mrg.onboarding.security.auth;
+package com.mrg.onboarding.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,6 +17,12 @@ public class AppUser {
 
     @Column(name = "user_name")
     private String username;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
 
     @Column(name = "email")
     private String email;

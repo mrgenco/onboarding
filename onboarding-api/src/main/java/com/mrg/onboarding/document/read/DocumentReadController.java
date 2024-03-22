@@ -66,7 +66,7 @@ public class DocumentReadController {
     }
 
     @GetMapping(value = "/list")
-    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     public ResponseEntity<List<DocumentDto>> listDocuments(){
         try{
             System.out.println("username : "+ SecurityContextHolder.getContext().getAuthentication().getName());
