@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
     useLocation,
-    useNavigate,
     Navigate,
   } from "react-router-dom";
 import { authService, AuthRequest } from "./common/auth-service"
@@ -20,10 +19,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const storedAuth = localStorage.getItem("isAuthenticated");
     return storedAuth ? JSON.parse(storedAuth) : false;
   });
-  console.log("AuthProvider isAuthenticated : ", isAuthenticated);
 
   useEffect(() => {
-    // Store isAuthenticated in localStorage whenever it changes
     localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
   }, [isAuthenticated]);
 

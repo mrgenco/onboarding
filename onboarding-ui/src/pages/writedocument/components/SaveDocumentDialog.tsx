@@ -9,6 +9,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { DialogActions } from '@mui/material';
+import { saveDocument } from '../service/SaveDocumentService';
 
 export default function SaveDocumentDialog() {
     const [open, setOpen] = React.useState(false);
@@ -22,8 +23,8 @@ export default function SaveDocumentDialog() {
     };
 
 
-    const handleSave = () => {
-        // api call
+    const handleSave = async (formData : any) => {
+        await saveDocument(formData);
     };
 
     const [status, setStatus] = React.useState('');
@@ -43,7 +44,8 @@ export default function SaveDocumentDialog() {
                         event.preventDefault();
                         const formData = new FormData(event.currentTarget);
                         const formJson = Object.fromEntries((formData as any).entries());
-                        console.log("formJson : ", formJson);
+                        formJson.status = status;
+                        handleSave(formJson);
                         handleClose();
                     },
                 }}
@@ -52,7 +54,6 @@ export default function SaveDocumentDialog() {
                 <DialogContent>
                     <Box sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-
                             <Grid item xs={12}>
                                 <TextField
                                     name="title"
@@ -81,6 +82,8 @@ export default function SaveDocumentDialog() {
                                     select
                                     label="Status"
                                     defaultValue="0"
+                                    value={status} // Add value prop bound to status state
+                                    onChange={(event) => setStatus(event.target.value)} // Add onChange handler to update status state
                                     helperText="Please select the document status"
                                 >
                                     <MenuItem value={0}>Draft</MenuItem>
