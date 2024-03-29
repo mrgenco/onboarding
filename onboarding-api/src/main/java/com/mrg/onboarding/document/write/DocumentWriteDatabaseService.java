@@ -50,7 +50,7 @@ class DocumentWriteDatabaseService{
         document.setLastUpdatedTime(currentTime);
         document.setStatus(requestDocumentStatus.get().getCode());
         document.setTitle(documentWriteRequest.getTitle());
-        document.setSummary(documentWriteRequest.getContent().substring(0,100));
+        document.setSummary(documentWriteRequest.getMarkdown().substring(0,100));
         documentRepository.save(document);
         return document.getUuid();
     }
@@ -64,7 +64,7 @@ class DocumentWriteDatabaseService{
         document.setLastUpdatedTime(currentTime);
         document.setTitle(documentWriteRequest.getTitle());
         document.setStatus(DocumentStatus.PUBLISHED.getCode());
-        document.setSummary(documentWriteRequest.getContent().substring(0,100));
+        document.setSummary(documentWriteRequest.getSummary());
         documentRepository.save(document);
         return document.getUuid();
     }

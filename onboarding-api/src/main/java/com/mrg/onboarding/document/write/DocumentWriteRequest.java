@@ -19,9 +19,17 @@ public class DocumentWriteRequest {
     @NotBlank(message = "title can not be blank")
     private String title;
 
-    @NotBlank(message = "content can not be blank")
-    private String content;
+    @NotBlank(message = "title can not be blank")
+    private String summary;
+
+    @NotBlank(message = "markdown can not be blank")
+    private String markdown;
 
     @NotBlank(message = "status can not be blank")
     private int status;
+
+    @NotBlank(message = "categories can not be blank")
+    private String categories;
+
+
 }

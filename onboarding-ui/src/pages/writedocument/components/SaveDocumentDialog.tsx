@@ -100,10 +100,10 @@ export default function SaveDocumentDialog(props: MarkdownPreviewProps) {
                                 <TextField
                                     required
                                     fullWidth
-                                    id="category"
+                                    id="categories"
                                     label="Categories"
                                     helperText="Enter categories as comma seperated words. (Ex : Cloud,Programming,Math)"
-                                    name="category"
+                                    name="categories"
                                 />
                             </Grid>
                         </Grid>
