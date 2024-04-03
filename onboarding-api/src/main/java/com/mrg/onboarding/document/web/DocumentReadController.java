@@ -1,10 +1,11 @@
-package com.mrg.onboarding.document.read;
+package com.mrg.onboarding.document.web;
 
 
 import com.mrg.onboarding.document.dto.DocumentDto;
 import com.mrg.onboarding.document.model.Document;
 import com.mrg.onboarding.document.dto.DocumentHtmlDto;
 import com.mrg.onboarding.document.dto.DocumentRawDto;
+import com.mrg.onboarding.document.read.DocumentReadService;
 import com.mrg.onboarding.document.render.RenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
