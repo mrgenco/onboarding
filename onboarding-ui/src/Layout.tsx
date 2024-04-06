@@ -18,6 +18,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondListItems} from './common/listItems';
 import { Outlet } from "react-router-dom";
 import { useAuth } from './AuthProvider';
+import { getUserInfo } from './common/GetUserInfoService';
+import { LogoutOutlined } from '@mui/icons-material';
 
 function Copyright(props: any) {
   return (
@@ -82,13 +84,35 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+interface User{
+    username: string;
+    name: string;
+    surname: string;
+    email: string;
+    password: string;
+    roles: string;
+
+}
 
 export default function Layout() {
   const [open, setOpen] = React.useState(true);
+  const [user, setUser] = React.useState<User>();
 
   let auth = useAuth();
   
-  console.log("Layout isAuthenticated : ", auth.isAuthenticated);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getUserInfo();
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching userinfo: ', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -129,11 +153,18 @@ export default function Layout() {
               >
                 Onboarding
               </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="subtitle1" sx={{ marginRight: 1 }}>
+                  Welcome {user?.name} {user?.surname}
+                </Typography>
+                <IconButton color="inherit">
+                  <Badge color="secondary">
+                    <LogoutOutlined />
+                  </Badge>
+                </IconButton>
+              </Box>
+              
             </Toolbar>
           </AppBar>
           <Drawer variant="permanent" open={open}>
