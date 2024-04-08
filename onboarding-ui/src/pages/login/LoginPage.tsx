@@ -22,6 +22,12 @@ export default function LoginPage() {
 
   let from = location.state?.from?.pathname || "/";
 
+  // Redirect if already authenticated
+  if (auth.isAuthenticated) {
+    navigate(from, { replace: true });
+    return null; // Return null if navigation is in progress
+  }
+
   
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
