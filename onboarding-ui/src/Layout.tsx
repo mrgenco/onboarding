@@ -103,20 +103,32 @@ export default function Layout() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getUserInfo();
-        setUser(response.data);
+        if (auth.isAuthenticated) {
+          const response = await getUserInfo();
+          setUser(response.data);
+        }
       } catch (error) {
-        console.error('Error fetching userinfo: ', error);
+        console.error('Error fetching userinfo:', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [auth.isAuthenticated]);
 
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  async function handleLogout(){
+    try {
+      console.log("signing out..");
+      await auth.signout();
+    } catch (error) {
+      console.error("Error occurred during signout:", error);
+    }
+  };
+  
 
   return (
     <div style={{ width: '100%' }}>
@@ -158,7 +170,7 @@ export default function Layout() {
                 <Typography variant="subtitle1" sx={{ marginRight: 1 }}>
                   Welcome {user?.name} {user?.surname}
                 </Typography>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={handleLogout}>
                   <Badge color="secondary">
                     <LogoutOutlined />
                   </Badge>
