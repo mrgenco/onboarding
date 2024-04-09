@@ -6,6 +6,7 @@ import com.mrg.onboarding.document.DocumentRepository;
 import com.mrg.onboarding.document.DocumentStatus;
 import com.mrg.onboarding.document.write.DocumentWriteRequest;
 import com.mrg.onboarding.document.write.NoDocumentFoundException;
+import com.mrg.onboarding.user.AppUser;
 import com.mrg.onboarding.user.AppUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,25 +29,25 @@ class DocumentWriteDatabaseService{
     @Transactional
     public UUID saveDocument(DocumentWriteRequest documentWriteRequest) throws NoDocumentFoundException {
         LocalDateTime currentTime = LocalDateTime.now();
-        Long currentUserId = userService.findCurrentAuthenticatedUserId();
         Optional<DocumentStatus> requestDocumentStatus = DocumentStatus.findByValue(documentWriteRequest.getStatus());
         if(requestDocumentStatus.isPresent()){
             if(documentWriteRequest.getUuid() != null){
                 Optional<Document> existingDocument = documentRepository.findByUuid(documentWriteRequest.getUuid());
                 if(documentRepository.findByUuid(documentWriteRequest.getUuid()).isPresent()){
-                    return updateDocument(documentWriteRequest, existingDocument, currentUserId, currentTime, requestDocumentStatus);
+                    return updateDocument(documentWriteRequest, existingDocument, currentTime, requestDocumentStatus);
                 }
                 throw new NoDocumentFoundException(documentWriteRequest.getUuid());
             }else{
-                return createDocument(documentWriteRequest, currentUserId, currentTime);
+                return createDocument(documentWriteRequest, currentTime);
             }
         }
         throw new IllegalArgumentException("Document can not be published without a valid DocumentStatus!");
     }
 
-    private UUID updateDocument(DocumentWriteRequest documentWriteRequest, Optional<Document> existingDocument, Long currentUserId, LocalDateTime currentTime, Optional<DocumentStatus> requestDocumentStatus) {
+    private UUID updateDocument(DocumentWriteRequest documentWriteRequest, Optional<Document> existingDocument, LocalDateTime currentTime, Optional<DocumentStatus> requestDocumentStatus) {
         Document document = existingDocument.get();
-        document.setLastUpdatedBy(currentUserId);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        document.setLastUpdatedBy(userService.findByUsername(username).get());
         document.setLastUpdatedTime(currentTime);
         document.setStatus(requestDocumentStatus.get().getCode());
         document.setTitle(documentWriteRequest.getTitle());
@@ -55,12 +56,13 @@ class DocumentWriteDatabaseService{
         return document.getUuid();
     }
 
-    private UUID createDocument(DocumentWriteRequest documentWriteRequest, Long currentUserId, LocalDateTime currentTime) {
+    private UUID createDocument(DocumentWriteRequest documentWriteRequest, LocalDateTime currentTime) {
         Document document = new Document();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        document.setCreatedBy(userService.findByUsername(username).get());
+        document.setLastUpdatedBy(userService.findByUsername(username).get());
         document.setUuid(UUID.randomUUID());
-        document.setCreatedBy(currentUserId);
         document.setCreatedTime(currentTime);
-        document.setLastUpdatedBy(currentUserId);
         document.setLastUpdatedTime(currentTime);
         document.setTitle(documentWriteRequest.getTitle());
         document.setStatus(DocumentStatus.PUBLISHED.getCode());

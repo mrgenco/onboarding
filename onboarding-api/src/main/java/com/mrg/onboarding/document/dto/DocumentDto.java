@@ -16,13 +16,11 @@ public class DocumentDto {
     private UUID uuid;
     private String title;
     private String summary;
-    private Long createdBy;
+    private String createdBy;
+    private String lastUpdatedBy;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdTime;
-
-    private Long lastUpdatedBy;
-
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastUpdatedTime;
     private Integer status;

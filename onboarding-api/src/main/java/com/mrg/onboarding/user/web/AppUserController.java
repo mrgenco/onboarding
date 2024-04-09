@@ -23,7 +23,7 @@ public class AppUserController {
     @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     public ResponseEntity<UserDto> getUserInfo(){
         try{
-            Optional<UserDto> userDto = userService.getAuthenticatedUser();
+            Optional<UserDto> userDto = userService.getAuthenticatedUserDto();
             if(userDto.isPresent()) return new ResponseEntity<>(userDto.get(), HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception ex){

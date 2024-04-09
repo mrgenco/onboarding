@@ -24,17 +24,11 @@ public class AppUserService {
         return appUserRepository.findByUsername(username);
     }
 
-    public Long findCurrentAuthenticatedUserId() {
-        String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
-        Optional<AppUser> appUser = appUserRepository.findByUsername(currentUsername);
-        return appUser.isPresent() ? appUser.get().getId() : null;
-    }
-
-    public void createUser(AppUser user) {
+   public void createUser(AppUser user) {
         appUserRepository.save(user);
     }
 
-    public Optional<UserDto> getAuthenticatedUser() {
+    public Optional<UserDto> getAuthenticatedUserDto() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<AppUser> appUser = appUserRepository.findByUsername(username);
         if(appUser.isPresent()){
@@ -44,4 +38,5 @@ public class AppUserService {
         }
         return Optional.empty();
     }
+
 }

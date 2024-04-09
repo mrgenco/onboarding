@@ -1,10 +1,13 @@
 package com.mrg.onboarding.document.model;
 
+import com.mrg.onboarding.user.AppUser;
+import com.mrg.onboarding.user.web.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Entity
@@ -26,19 +29,33 @@ public class Document {
     @Column(name = "summary")
     private String summary;
 
-    @Column(name = "created_by")
-    private Long createdBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private AppUser createdBy;
 
     @Column(name = "created_time")
     private LocalDateTime createdTime;
 
-    @Column(name = "last_updated_by")
-    private Long lastUpdatedBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "last_updated_by", referencedColumnName = "id")
+    private AppUser lastUpdatedBy;
 
     @Column(name = "last_updated_time")
     private LocalDateTime lastUpdatedTime;
 
     @Column(name = "status")
     private Integer status;
+
+
+    @PrePersist
+    private void prePersist() {
+        this.uuid = UUID.randomUUID(); // Assuming you want to generate UUID here as well
+        this.createdTime = LocalDateTime.now();
+        this.lastUpdatedTime = LocalDateTime.now();
+    }
+    @PreUpdate
+    private void preUpdate() {
+        this.lastUpdatedTime = LocalDateTime.now();
+    }
 
 }

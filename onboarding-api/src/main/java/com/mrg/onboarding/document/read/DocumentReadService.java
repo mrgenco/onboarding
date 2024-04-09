@@ -36,15 +36,21 @@ public class DocumentReadService {
     public List<DocumentDto> getAll() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<AppUser> appUser = userService.findByUsername(username);
-        if(appUser.isPresent())
-            return documentRepository.findByCreatedBy(appUser.get().getId())
+        if (appUser.isPresent()) {
+            return documentRepository.findByCreatedBy(appUser.get())
                     .stream()
-                    .map(document -> modelMapper.map(document, DocumentDto.class))
+                    .map(this::convertToDto)
                     .collect(Collectors.toList());
-        return Collections.EMPTY_LIST;
+        }
+        return Collections.emptyList();
     }
 
-    public Optional<Document> getDocumentByTitle(String title) {
-        return documentRepository.findByTitle(title);
+    private DocumentDto convertToDto(Document document) {
+        DocumentDto documentDto = modelMapper.map(document, DocumentDto.class);
+        String createdByFullName = document.getCreatedBy().getName() + " " + document.getCreatedBy().getSurname();
+        String lastUpdatedByFullName = document.getLastUpdatedBy().getName() + " " + document.getLastUpdatedBy().getSurname();
+        documentDto.setCreatedBy(createdByFullName);
+        documentDto.setLastUpdatedBy(lastUpdatedByFullName);
+        return documentDto;
     }
 }
