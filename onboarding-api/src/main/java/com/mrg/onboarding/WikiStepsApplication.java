@@ -13,10 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 @EnableConfigurationProperties(RsaKeyProperties.class)
-public class OnboardingApplication {
+public class WikiStepsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OnboardingApplication.class, args);
+		SpringApplication.run(WikiStepsApplication.class, args);
 	}
 
 

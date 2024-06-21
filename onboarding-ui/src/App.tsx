@@ -7,6 +7,7 @@ import WriteDocument from './pages/writedocument/WriteDocumentPage';
 import Layout from './Layout';
 import { AuthProvider, RequireAuth } from './AuthProvider';
 import LoginPage from './pages/login/LoginPage';
+import ReadDocumentPage from './pages/read/ReadDocumentPage';
 
 
 
@@ -21,7 +22,8 @@ export default function App() {
           <Route index element={<RequireAuth><DashboardPage /></RequireAuth>} />
           <Route path="mydocuments" element={<RequireAuth><MyDocuments /></RequireAuth>} />
           <Route path="settings" element={<RequireAuth><Settings /></RequireAuth>} />
-          <Route path="writedocument" element={<RequireAuth><WriteDocument /></RequireAuth>}
+          <Route path="writedocument" element={<RequireAuth><WriteDocument /></RequireAuth>} />
+          <Route path="document/:uuid" element={<RequireAuth><ReadDocumentPage /></RequireAuth>}
         />
         </Route>
       </Routes>

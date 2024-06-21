@@ -1,7 +1,10 @@
 package com.mrg.onboarding.security.auth;
 
+import lombok.Getter;
+
 import java.util.Optional;
 
+@Getter
 public enum AuthenticationMethod {
 
     DB("DB"),
@@ -12,10 +15,6 @@ public enum AuthenticationMethod {
     private final String code;
     AuthenticationMethod(String code) {
         this.code=code;
-    }
-
-    public String getCode(){
-        return this.code;
     }
 
     public static Optional<AuthenticationMethod> findByValue(String code){

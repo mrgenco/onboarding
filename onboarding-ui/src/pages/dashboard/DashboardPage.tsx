@@ -1,6 +1,8 @@
 import React from 'react';
 import { Grid, Card, CardContent, Typography, CardActionArea, Button } from '@mui/material';
 import { getDocumentList } from './services/GetDocumentListService';
+import { useNavigate } from 'react-router-dom';
+
 interface ListItem {
   uuid: string;
   title: string;
@@ -16,6 +18,7 @@ export default function DashboardPage() {
   const [listData, setListData] = React.useState<ListItem[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<Error | null>(null);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -34,9 +37,9 @@ export default function DashboardPage() {
   }, []);
 
   const handleStartReading = (uuid: string) => {
-    // Add your logic for handling the "Start Reading" action here
-    console.log(`Start reading ${uuid}`);
+    navigate(`/document/${uuid}`);
   };
+
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching documents</div>;
