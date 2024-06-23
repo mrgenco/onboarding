@@ -1,4 +1,4 @@
-package com.mrg.onboarding.document.web;
+package com.mrg.onboarding.document.read;
 
 
 import com.mrg.onboarding.document.dto.DocumentDto;

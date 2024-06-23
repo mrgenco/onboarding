@@ -36,13 +36,10 @@ public class DocumentReadService {
     public List<DocumentDto> getAll() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<AppUser> appUser = userService.findByUsername(username);
-        if (appUser.isPresent()) {
-            return documentRepository.findByCreatedBy(appUser.get())
-                    .stream()
-                    .map(this::convertToDto)
-                    .collect(Collectors.toList());
-        }
-        return Collections.emptyList();
+        return appUser.map(user -> documentRepository.findByCreatedBy(user)
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList())).orElse(Collections.emptyList());
     }
 
     private DocumentDto convertToDto(Document document) {
